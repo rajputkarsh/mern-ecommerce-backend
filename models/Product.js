@@ -31,7 +31,7 @@ const ProductSchema = new mongoose.Schema(
         },
     },
     {
-        timestamp: true
+        timestamps: true
     }
 )
 
