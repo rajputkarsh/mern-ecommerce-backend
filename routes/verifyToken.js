@@ -5,6 +5,7 @@ const verifyToken = (req, res, next) => {
     const authHeader = req.headers.token
 
     if(authHeader){
+        const token = authHeader.split(" ")[1]
         jwt.verify(token, process.env.JWT_SECRET, (error, user) => {
             
             if (error) res.status(403).json("Invalid Token")
@@ -19,7 +20,30 @@ const verifyToken = (req, res, next) => {
     }
 }
 
+const verifyTokenAndAuthorisation = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.id === req.params.id || req.user.isAdmin) {
+            next()
+        }
+        else {
+            return res.status(403).json("You are not authorized to do this action")
+        }
+    })
+}
+
+const verifyTokenAndAdmin = (req, res, next) => {
+    verifyToken(req, res, () => {
+        if (req.user.isAdmin) {
+            next()
+        }
+        else {
+            return res.status(403).json("You are not authorized to do this action")
+        }
+    })
+}
 
 module.exports = {
-    verifyToken: verifyToken
+    verifyToken:                 verifyToken,
+    verifyTokenAndAuthorisation: verifyTokenAndAuthorisation,
+    verifyTokenAndAdmin:         verifyTokenAndAdmin
 }
