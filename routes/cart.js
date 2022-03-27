@@ -16,7 +16,7 @@ router.post("/", verifyFunctions.verifyToken, async (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", verifyFunctions.verifyTokenAndAuthorization, async (req, res) => {
+router.put("/:id", verifyFunctions.verifyTokenAndAuthorisation, async (req, res) => {
     try {
         const updatedCart = await Cart.findByIdAndUpdate(
             req.params.id,
@@ -32,7 +32,7 @@ router.put("/:id", verifyFunctions.verifyTokenAndAuthorization, async (req, res)
 });
 
 //DELETE
-router.delete("/:id", verifyFunctions.verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id", verifyFunctions.verifyTokenAndAuthorisation, async (req, res) => {
     try {
         await Cart.findByIdAndDelete(req.params.id);
         res.status(200).json("Cart has been deleted...");
@@ -42,7 +42,7 @@ router.delete("/:id", verifyFunctions.verifyTokenAndAuthorization, async (req, r
 });
 
 //GET USER CART
-router.get("/find/:userId", verifyFunctions.verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId", verifyFunctions.verifyTokenAndAuthorisation, async (req, res) => {
     try {
         const cart = await Cart.findOne({ userId: req.params.userId });
         res.status(200).json(cart);

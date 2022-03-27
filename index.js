@@ -6,6 +6,7 @@ const userRoutes = require("./routes/user")
 const authRoutes = require("./routes/authentication")
 const productRoutes = require("./routes/product")
 const cartRoutes = require("./routes/cart")
+const orderRoutes = require("./routes/order")
 
 dotenv.config()
 const app = express()
@@ -23,6 +24,7 @@ app.use("/api/auth",     authRoutes)
 app.use("/api/user",     userRoutes)
 app.use("/api/products", productRoutes)
 app.use("/api/cart",     cartRoutes)
+app.use("/api/order",    orderRoutes)
 
 app.listen(process.env.PORT, ()=>{
     console.log("BACKEND SERVER")
